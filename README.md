@@ -1,1 +1,1 @@
-# code for testing libctbereye
+# code for testing libcybereye
