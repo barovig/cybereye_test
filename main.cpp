@@ -1,6 +1,6 @@
 #include <iostream>
 #include "unistd.h"
-#include "cybereye.h"
+#include "ce.h"
 #include "opencv2/core.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/video.hpp"
@@ -18,7 +18,7 @@ bool update = true;
 
 int main()
 {
-	cv::Ptr<ce::Model> model = new ce::Model();
+	ce::Model *model = new ce::Model();
     BkgSegmentationEngine *e = new BkgSegmentationEngine(model);
     Collector *c = new Collector();
     Tracker *t = new Tracker();
@@ -56,19 +56,19 @@ int main()
 		
 		if(!mask.empty())
 		{
-			cv::filter2D(mask, mask, 0, Mat::ones(5,5, CV_8UC1));
+//			cv::filter2D(mask, mask, 0, Mat::ones(5,5, CV_8UC1));
 			
-			// EROSION/DILATION approach
-			cv::erode(mask, mask, cv::Mat());
-			cv::erode(mask, mask, cv::Mat());
-			cv::erode(mask, mask, cv::Mat());
-			cv::erode(mask, mask, cv::Mat());
+//			// EROSION/DILATION approach
+//			cv::erode(mask, mask, cv::Mat());
+//			cv::erode(mask, mask, cv::Mat());
+//			cv::erode(mask, mask, cv::Mat());
+//			cv::erode(mask, mask, cv::Mat());
 			 
-			cv::dilate(mask, mask, cv::Mat());
+//			cv::dilate(mask, mask, cv::Mat());
 			
-			// TRY DENOISING
+//			// TRY DENOISING
 			
-			cv::filter2D(mask, mask, 0, Mat::ones(5,5, CV_8UC1));
+//			cv::filter2D(mask, mask, 0, Mat::ones(5,5, CV_8UC1));
 			
 		}
 		
@@ -77,11 +77,9 @@ int main()
 		
 		key = (char)cv::waitKey(10);
     }
-	
-    delete e;
-    delete c;
-    delete t;
 
+	//cm.stopAllThreads();
+		
     return 0;
 }
 
