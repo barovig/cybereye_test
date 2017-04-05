@@ -5,7 +5,7 @@ CONFIG -= qt
 
 SOURCES += main.cpp
 
-LIBS += -L$$PWD/../../../root/lib/ -lopencv_world -lcybereye -lpthread
+LIBS += -L$$PWD/../../../root/lib/  -lcybereye  -lopencv_world -lpthread
 
 INCLUDEPATH += $$PWD/../../../root/include
 #INCLUDEPATH += $$PWD/../../../root/include/cybereye
