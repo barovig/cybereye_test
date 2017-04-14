@@ -3,9 +3,10 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    server_main.cpp
 
-LIBS += -L$$PWD/../../../root/lib/  -lcybereye  -lopencv_world -lpthread
+LIBS += -L$$PWD/../../../root/lib/  -lcybereye  -lopencv_world -lboost_system -lboost_serialization -lpthread
 
 INCLUDEPATH += $$PWD/../../../root/include
 #INCLUDEPATH += $$PWD/../../../root/include/cybereye
