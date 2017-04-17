@@ -32,7 +32,7 @@ int _main()
 	tcp::acceptor acceptor(ios, tcp::endpoint(tcp::v4(), port));
 	// create inbound header buffer 
 	const int header_length = 8;
-	char buff_header[header_length];
+	char	  buff_header[header_length];
 	
 	// create inbound data vector
 	vector<char> buff_data;
@@ -44,7 +44,8 @@ int _main()
 		boost::system::error_code err;
 		
 		// read data into header buffer and construct stream
-		size_t data_sz = 0;		
+		size_t data_sz = 0;	
+		
 		{ // scope closes stream
 			sock.read_some(buffer(buff_header), err);
 			istringstream is(string(buff_header, header_length));
@@ -66,6 +67,12 @@ int _main()
 			
 			arch >> img;
 		}
+		
+		// perform recognition
+		
+		std::string label;
+		
+		
 		
 	}
 	

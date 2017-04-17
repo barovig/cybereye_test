@@ -70,15 +70,15 @@ int main()
 
 	eye.stop();
 	
-	// write images to files
+//	// write images to files
 //	int i = 1;
-//	for(ce::ImgObj img : eye.getImages())
+//	for(P_ImgObj& img : eye.getImages())
 //	{
 //		string path("/tmp/"+std::to_string(i++)+".jpg");
-//		imwrite(path, img.getImgData());
+//		imwrite(path, img->getImgData());
 //	}
 	
-//	// prepare boost stuff to send data to client
+////	 prepare boost stuff to send data to client
 //	io_service ios;
 	
 //	// make endpoint directly - don't use resolver and iterator
@@ -124,7 +124,7 @@ int main()
 //	buffs.push_back(buffer(outbound_header));
 //	buffs.push_back(buffer(outbound_data));
 //	sock.write_some(buffs, err);
-	
+
 	
 	cout << "BEfore exit" << endl;
 	destroyAllWindows();

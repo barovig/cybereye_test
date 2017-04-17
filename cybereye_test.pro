@@ -4,7 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    server_main.cpp
+    server_main.cpp \
+    ceye_server.cpp
 
 LIBS += -L$$PWD/../../../root/lib/  -lcybereye  -lopencv_world -lboost_system -lboost_serialization -lpthread
 
