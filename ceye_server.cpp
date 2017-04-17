@@ -36,11 +36,9 @@ int __main()
 	ce::CoreManager cm(receiver, engine);
 	
 	cm.startReceiving();
-	cout << "Press enter to stop" << endl;
-	string input;
-	cin >> input;
-	cm.stopAllThreads();
+	while(true) sleep(1000);
 	
+	cm.stopAllThreads();
 	return 0;
 }
 
