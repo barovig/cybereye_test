@@ -23,7 +23,7 @@ using namespace boost::serialization;
 /*
  * to install run something like
  * g++ ceye_server.cpp -I/home/semargl/root/include -L/home/semargl/root/lib -Wl,-rpath=/home/semargl/root/lib \
- * -lcybereye -lopencv_world -lboost_serialization -lboost_system -o ceye_server
+ -lcybereye -lopencv_world -lboost_serialization -lboost_system -o ceye_server
  * *
  */
 
@@ -36,10 +36,10 @@ int __main()
 	ce::CoreManager cm(receiver, engine);
 	
 	cm.startReceiving();
-	
-	// construct CoreManager
-	
-	// run recognition thread
+	cout << "Press enter to stop" << endl;
+	string input;
+	cin >> input;
+	cm.stopAllThreads();
 	
 	return 0;
 }
