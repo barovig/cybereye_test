@@ -30,13 +30,12 @@ using namespace boost::serialization;
 int __main()
 {		
 	// construct Receiver and RecognitionEngine
-	Ptr<ObjReceiver> receiver(new ObjReceiver());
+	Ptr<ObjReceiver> receiver(new ObjReceiver(13491));
 	Ptr<RecognitionEngine> engine(new RecognitionEngine());
 	receiver->setEngine(engine);	
 	ce::CoreManager cm(receiver, engine);
 	
 	cm.startReceiving();
-	while(true) sleep(1000);
 	
 	cm.stopAllThreads();
 	return 0;
