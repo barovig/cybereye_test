@@ -35,8 +35,16 @@ int __main()
 	receiver->setEngine(engine);	
 	ce::CoreManager cm(receiver, engine);
 	
-	cm.startReceiving();
+	try{
+		cout << "Starting Receiver..." << endl;
+		cm.startReceiving();
+	}
+	catch(boost::archive::archive_exception e)
+	{
+		cerr << e.what() << endl;
+	}
 	
+
 	cm.stopAllThreads();
 	return 0;
 }
