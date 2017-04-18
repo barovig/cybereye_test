@@ -29,15 +29,18 @@ static void onMouse( int event, int x, int y, int flags, void* userdata);
 int main()
 {		
 	Mat frame, mask;
-	
+	bool showMask = false;
 	// cybereye setup
 	CyberEye eye(0);
+	
+	// set conn params
+	eye.setIP("192.168.1.15");
+	eye.setPort(13491);
 	eye.initialise();
 	eye.start();
 	eye.getFrame(frame);
 	
 	namedWindow("frame");
-	namedWindow("mask");
 	setMouseCallback( "frame", onMouse, (void*)&mask);
 	
 	try{
@@ -57,9 +60,16 @@ int main()
 				mask = cv::Scalar::all(0);
 			}
 			
+			if(key == 'm')
+			{
+				showMask = !showMask;
+				showMask ? namedWindow("mask") : destroyWindow("mask");
+			}
+			
+			
 			if(!frame.empty())
 				imshow("frame", frame);
-			if(!mask.empty())
+			if(!mask.empty() && showMask)
 				imshow("mask", mask);
 	
 		}
