@@ -22,20 +22,22 @@ using namespace boost::asio::ip;
 using namespace boost::serialization;
 
 char key = -1;
-
 Point prevPt(-1, -1);
 
 static void onMouse( int event, int x, int y, int flags, void* userdata);
+
 int main()
 {		
 	Mat frame, mask;
 	bool showMask = false;
+	
 	// cybereye setup
 	CyberEye eye(0);
 	
 	// set conn params
 	eye.setIP("192.168.1.15");
 	eye.setPort(13491);
+	
 	eye.initialise();
 	eye.start();
 	eye.getFrame(frame);
@@ -66,6 +68,8 @@ int main()
 				showMask ? namedWindow("mask") : destroyWindow("mask");
 			}
 			
+			if(key == 'c')
+				eye.clearModel();
 			
 			if(!frame.empty())
 				imshow("frame", frame);
@@ -80,63 +84,6 @@ int main()
 
 	eye.stop();
 	
-//	// write images to files
-//	int i = 1;
-//	for(P_ImgObj& img : eye.getImages())
-//	{
-//		string path("/tmp/"+std::to_string(i++)+".jpg");
-//		imwrite(path, img->getImgData());
-//	}
-	
-////	 prepare boost stuff to send data to client
-//	io_service ios;
-	
-//	// make endpoint directly - don't use resolver and iterator
-//	string addr = "192.168.1.15";
-//	int port = 13491;
-//	tcp::endpoint endpt(address::from_string(addr), port);
-	
-//	// create socket and connect
-//	tcp::socket sock(ios);
-//	sock.connect(endpt);
-	
-//	boost::system::error_code err;
-	
-//	const int header_length = 8;
-	
-//	// create archive and stream
-//	// NOTE: because binary_oarchive is non-portable, use text_archive
-//    std::ostringstream archive_stream;
-//    boost::archive::text_oarchive archive(archive_stream);	
-//	Mat img;
-//	ImgObj imObj = eye.getImages()[0];
-//	imObj.getImgData().copyTo(img);
-//    archive << img;
-//    string outbound_data = archive_stream.str();	// string data to send
-	
-//	// create stringstream for header data
-//	ostringstream header_stream;
-//	// send data size as hex num string, note fixed length
-//	header_stream << setw(header_length) << std::hex << outbound_data.size();
-	
-//	// sanity check
-//	if(!header_stream || header_stream.str().size() != header_length)
-//	{
-//		cerr << "Sent header length and declared length mismatch - dayum!" << endl;
-//		return 0;
-//	}
-	
-//	string outbound_header = header_stream.str();	// create string for header 
-	
-//	// write all data to socket using vector of buffers
-	
-//	vector<const_buffer> buffs;
-//	buffs.push_back(buffer(outbound_header));
-//	buffs.push_back(buffer(outbound_data));
-//	sock.write_some(buffs, err);
-
-	
-	cout << "BEfore exit" << endl;
 	destroyAllWindows();
 	return 0;
 }
